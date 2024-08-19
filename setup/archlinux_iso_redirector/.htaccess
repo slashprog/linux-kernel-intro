@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine on #only use this once per .htaccess
+    RewriteCond %{REQUEST_FILENAME} !-d 
+    RewriteCond %{REQUEST_FILENAME}\.php -f 
+    RewriteRule ^(.*)$ $1.php 
+
+</IfModule>
+
+# Setup Cookies
+<IfModule mod_headers.c>
+    Header always edit Set-Cookie (.*) "$1; HTTPOnly"
+    Header always edit Set-Cookie (.*) "$1; Secure"
+    Header always edit Set-Cookie (.*) "$1; SameSite=None"
+</IfModule>
+

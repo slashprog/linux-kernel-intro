@@ -1,0 +1,4 @@
+for script in ~/.shell/rc/*.sh
+do
+   source $script
+done

@@ -1,0 +1,90 @@
+== Idioms.function == map:if, shortcut:f  ==
+void |?FUNCTION_NAME|(void)
+{
+    <CURSOR>
+    return;
+}
+== Idioms.function-static == map:isf, shortcut:t  ==
+/* 
+ * ===  FUNCTION  ============================================================
+ *         Name:  |?FUNCTION_NAME|
+ *  Description:  
+ * ===========================================================================
+ */
+static void<CURSOR> |FUNCTION_NAME|(<+argument_list+>)
+{
+<SPLIT>	return <+return_value+>;
+}
+== Idioms.main == map:im, shortcut:m  ==
+#include	<stdlib.h>
+
+int main(int argc, char *argv[])
+{<CURSOR>
+<SPLIT>	return EXIT_SUCCESS;
+}
+== Idioms.enum == map:ie, shortcut:e  ==
+enum |?ENUM_NAME| {<CURSOR>
+<SPLIT>};				/* ----------  end of enum |ENUM_NAME|  ---------- */
+
+typedef enum |ENUM_NAME| |ENUM_NAME:c|;
+== Idioms.struct == map:is, shortcut:s  ==
+struct |?STRUCT_NAME| {<CURSOR>
+<SPLIT>};				/* ----------  end of struct |STRUCT_NAME|  ---------- */
+
+typedef struct |STRUCT_NAME| |STRUCT_NAME:c|;
+== Idioms.union == map:iu, shortcut:u  ==
+union |?UNION_NAME| {<CURSOR>
+<SPLIT>};				/* ----------  end of union |UNION_NAME|  ---------- */
+
+typedef union |UNION_NAME| |UNION_NAME:c|;
+== Idioms.scanf == map:isc, shortcut:s, insert  ==
+scanf("<CURSOR>", &);
+== Idioms.printf == map:ipr, shortcut:p, insert  ==
+pr_notice("<CURSOR>\n");
+== Idioms.calloc == map:ica, shortcut:c  ==
+|?POINTER| = calloc((size_t)(<CURSOR><+COUNT+>), sizeof(<+TYPE+>));
+if (|POINTER|==NULL) {
+	fprintf(stderr, "\ndynamic memory allocation failed\n");
+	exit(EXIT_FAILURE);
+}
+
+free(|POINTER|);
+|POINTER|	= NULL;
+
+== Idioms.malloc == map:ima, shortcut:m  ==
+if ((|?POINTER| = malloc(<CURSOR>)) == NULL) {
+    error("malloc", __FUNCTION__);
+    goto exit_program;
+}
+
+== Idioms.realloc == map:ire, shortcut:r  ==
+|?POINTER| = realloc(|POINTER|, sizeof(<CURSOR><+TYPE+>));
+if (|POINTER|==NULL) {
+	fprintf(stderr, "\ndynamic memory reallocation failed\n");
+	exit(EXIT_FAILURE);
+}
+
+== Idioms.sizeof == map:isi, shortcut:s, insert  ==
+sizeof(<CURSOR><SPLIT>)
+== Idioms.assert == map:ias, shortcut:a, insert  ==
+assert(<CURSOR><SPLIT>);
+== Idioms.open-input-file == map:ii, shortcut:i  ==
+int |?FILE_DESCRIPTOR|;
+
+if ((|FILE_DESCRIPTOR| = open(|?FILE_NAME|, O_RDONLY)) == -1) {
+    error("open", |FILE_NAME|);
+    goto exit_program;
+}
+<SPLIT>
+== Idioms.open-output-file == map:io, shortcut:o  ==
+int |?FILE_DESCRIPTOR|;
+
+if ((|FILE_DESCRIPTOR| = open(|?FILE_NAME|, O_WRONLY | O_CREAT)) == -1) {
+    error("open", |FILE_NAME|);
+    goto exit_program;
+}
+<SPLIT>
+== Idioms.fprintf == map:ifsc, shortcut:f, insert  ==
+fprintf(|?FILEPOINTER|, "<CURSOR>\n", );
+== Idioms.fscanf == map:ifpr, shortcut:f, insert  ==
+fscanf(|?FILEPOINTER|, "<CURSOR>", & );
