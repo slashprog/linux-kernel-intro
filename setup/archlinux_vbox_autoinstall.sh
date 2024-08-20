@@ -17,10 +17,10 @@ reflector > /etc/pacman.d/mirrorlist
 
 # Install the following packages (some are needed for kernel build / development)
 # There are others which are optional (vim, tmux, mc, most, tree, etc...)
-pacstrap /mnt base base-devel grub parted openssh git bc cpio ntp htop      \
-	      linux-lts linux-lts-headers linux-lts-docs linux-api-headers  \
-	      cscope man-db man-pages texinfo most bat tree mc vim tmux     \
-	      linux-firmware ccache llvm gdb lldb crash pahole kexec-tools  \
+pacstrap /mnt base base-devel grub parted openssh git bc cpio ntp htop cscope \
+	      linux-lts linux-lts-headers linux-lts-docs linux-api-headers    \
+	      man-db man-pages texinfo most bat tree mc vim tmux starship     \
+	      linux-firmware ccache llvm gdb lldb crash pahole kexec-tools    \
 	      bpftrace perf trace-cmd elfutils strace
 
 

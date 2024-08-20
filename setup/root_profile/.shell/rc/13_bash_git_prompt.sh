@@ -1,1 +1,0 @@
-../scripts/bash_git_prompt.sh
