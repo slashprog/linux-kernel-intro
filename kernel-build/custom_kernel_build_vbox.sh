@@ -165,12 +165,18 @@ tar xvf ${BUILD_FOLDER}/${KERNEL_BUILD}-x86.tar.xz \
 ### Step 4: Update the boot loader
 # For the current scenario, we can simply use 'grub-mkconfig' command that
 # will detect the newly copied kernel image in /boot and add a sub-menu entry
-# under "Advanced configuration" boot menu
+# under "Advanced options for Arch Linux" boot menu
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
 ### Final step: Reboot and test booting from the new kernel
 reboot
-# Select "Advanced configuration" in GRUB's boot menu and select the new kernel
-# that will be listed.
+# Select "Advanced options for Arch Linux" in GRUB's boot menu and select the
+# new kernel that will be listed as new menu entry at the end titled 
+# "Arch Linux, with Linux 6.10.6-vbox" for instance (the kernel version could
+# be different based on your build).
+
+# And that's it! You should be able to boot into your Arch Linux with the 
+# new kernel. Once logged in, try running the command 'uname -r' to verify
+# your new kernel release.
 
