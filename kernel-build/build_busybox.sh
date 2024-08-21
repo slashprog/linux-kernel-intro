@@ -30,7 +30,7 @@ make O=${BUILD_FOLDER} oldconfig
 #make O=${BUILD_FOLDER} menuconfig
 
 #### Step 3: Build
-make
+make O=${BUILD_FOLDER}
 
 #### Step 4: Install (by default under $BUILD_FOLDER/_install)
 make install
