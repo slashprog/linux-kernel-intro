@@ -11,7 +11,7 @@ lsblk
 parted -s /dev/sdb mklabel msdos
 
 # Create a new partition on this hard drive
-parted -s /dev/sdb mpart primary ext4 0% 100%
+parted -s /dev/sdb mkpart primary ext4 1% 100%
 
 # Verify the partition name shown as sdb1
 lsblk
