@@ -3,7 +3,6 @@
 # Create a new initramfs image with custom kernel build with busybox as user-land
 # -------------------------------------------------------------------------------
 
-
 # Step 1: Create a template folder to host initramfs filesystem contents
 mkdir -p /usr/local/build/initramfs-6.10.6-vbox/rootfs
 
@@ -24,7 +23,7 @@ mv linuxrc init
 mkdir proc sys dev tmp
 
 # The following folders are optional, but good to have them created.
-mkdir etc etc var root mnt media run srv
+mkdir etc var root mnt media run srv
 
 # Busybox init program expects rcS script to be in /etc/init.d/rcS
 mkdir -p etc/init.d
@@ -54,13 +53,16 @@ END_RCS
 
 chmod +x etc/init.d/rcS
 
+### Step 2: Create a cpio archive from the template folder
 # Now create a cpio archive using the new cpio format from this folder
 find . | cpio -H newc -o | gzip -c > ../initramfs-6.10.6-vbox.cpio.gz
 
+### Step 3: Install the initramfs image so that the boot loader can locate them.
 # Let us install this initramfs image on your new hard drive boot
 mount /dev/sdb1 /mnt
 cp /usr/local/build/initramfs-6.10.6-vbox/initramfs-6.10.6-vbox.cpio.gz /mnt/boot/
 
+### Step 4: Configure the boot loader to load initramfs alongside with the kernel
 # Add a new entry in the GRUB configuration file to boot our kernel
 # with initramfs image as root filesystem
 cat >> /mnt/boot/grub/grub.cfg <<END_GRUB_CONFIG
@@ -69,5 +71,4 @@ menuentry "Boot Linux 6.10.6-vbox with BusyBox via initramfs" {
     initrd (hd1,1)/boot/initramfs-6.10.6-vbox.cpio.gz
 }
 END_GRUB_CONFIG
-
 
