@@ -1,0 +1,6 @@
+1. Try using param_set_uint_minmax() to validate delay 
+within a range (100 to 5000) instead of the change_delay() logic
+
+2. Implement functionality to change the kthread's name as
+listed in the 'ps ax' command listing via module parameters.
+

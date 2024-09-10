@@ -17,7 +17,32 @@ module_param(count, int, 0444);
 MODULE_PARM_DESC(count, "set the intial count value");
 
 unsigned int delay = 3000;
-module_param(delay, uint, 0644);
+/* module_param(delay, uint, 0644); */  /* 0644 -> rw- r-- r-- */
+
+static int change_delay(const char *val, const struct kernel_param *kp)
+{
+	unsigned int d;
+	int ret = kstrtouint(val, 0, &d);
+
+	if (ret) {
+		pr_err("%s:%s: failed to convert %s to unsigned integer: %pe\n",
+				KBUILD_MODNAME, __func__, val, ERR_PTR(ret));
+		return ret;
+	}
+
+	if (d < 100 || d > 5000) {
+		pr_err("%s:%s: delay (%u) not in defined range (100 to 5000)\n",
+				KBUILD_MODNAME, __func__, d);
+		return -ERANGE;
+	}
+
+	delay = d;
+	pr_notice("%s:%s: delay changed to %d\n", KBUILD_MODNAME, __func__, d);
+	return 0;
+}
+
+module_param_call(delay, change_delay, param_get_uint, &delay, 0644);
+
 MODULE_PARM_DESC(delay, "Sets the sleep interval within the loop");
 
 static int simple_kthread_fn(void *data)
