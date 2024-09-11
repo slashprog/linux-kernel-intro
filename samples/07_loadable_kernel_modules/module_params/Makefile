@@ -10,4 +10,5 @@ clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) clean
 
 install:
-	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
+	#$(MAKE) -C $(KDIR) M=$(PWD) INSTALL_MOD_PATH=/mnt INSTALL_MOD_DIR=custom modules_install
+	$(MAKE) -C $(KDIR) M=$(PWD) INSTALL_MOD_DIR=custom modules_install

@@ -93,4 +93,5 @@ module_exit(simple_kthread_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Chandrashekar Babu <chandra@slashprog.com>");
 MODULE_DESCRIPTION("A simple LKM to demonstrate usage of kthreads and module parameters");
-
+MODULE_ALIAS("thread-test");
+MODULE_ALIAS("count-loop");
